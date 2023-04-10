@@ -1,12 +1,12 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, useWindowDimensions, View} from "react-native";
+import {Image, StyleSheet, Text, useWindowDimensions, View} from "react-native";
 import logo from "../assets/imgs/logo.png";
 import imgHomePage from "../assets/imgs/imgs_hp.png"
 
 function HomeScreen() {
     const {height} = useWindowDimensions();
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <>
             <View style={styles.container}>
                 <Image source={logo} style={[styles.logo, {height: height*0.3}]} />
                 <Text style={styles.title}>Atteignez vos objectifs de fitness avec nos programmes d'entraînement personnalisés</Text>
@@ -15,7 +15,7 @@ function HomeScreen() {
                 <Image source={imgHomePage} style={styles.img} />
             </View>
 
-        </ScrollView>
+        </>
     );
 }
 
