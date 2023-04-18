@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
+import { View, Text, image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
 import React, {useState} from 'react'
 import logo from '../assets/imgs/logo.png'
 import { useNavigation } from '@react-navigation/native'
@@ -27,7 +27,7 @@ function ConfirmEmailScreen() {
   return (
     <ScrollView showsHorizontalScrollIndicator={false}>
     <View style={styles.container}>
-      <Image source={logo} style={[styles.logo, {height: height*0.3}]} />
+      <image source={logo} style={[styles.logo, {height: height*0.3}]} />
       <Text style={styles.title}>
         Confirmer votre adresse email
       </Text>

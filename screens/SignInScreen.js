@@ -1,4 +1,4 @@
-import {View, Text, Image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
+import {View, Text, image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
 import React, {useState} from 'react'
 import {useNavigation} from "@react-navigation/native";
 import CustomInput from "../components/CustomInput";
@@ -28,7 +28,7 @@ function SignInScreen() {
     return (
         <ScrollView showsHorizontalScrollIndicator={false}>
             <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height * 0.4}]}/>
+                <image source={logo} style={[styles.logo, {height: height * 0.4}]}/>
                 <CustomInput
                     placeholder={"Email"}
                     value={email}

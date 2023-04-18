@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
+import {Button, image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
 import logo from "../assets/imgs/logo.png";
-import * as ImagePicker from 'expo-image-picker';
+import * as imagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import defaultAvatar from '../assets/imgs/defaultProfil.jpeg';
 import CustomButton from "../components/CustomButton";
@@ -15,21 +15,21 @@ function Profile() {
 
     const [birthday, setBirthday] = useState(new Date())
     const [show, setShow] = useState(false)
-    const [image, setImage] = useState(null);
+    const [image, setimage] = useState(null);
     const [username, setUsername] = useState('');
     const [imgFetched, setImgFetched] = useState(false);
 
-    const pickImage = async () => {
+    const pickimage = async () => {
         // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+        let result = await imagePicker.launchimageLibraryAsync({
+            mediaTypes: imagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
         });
         if (!result.canceled) {
             await storeData(result.assets[0].uri)
-            setImage(result.assets[0].uri);
+            setimage(result.assets[0].uri);
         }
     }
 
@@ -52,7 +52,7 @@ function Profile() {
             const profilePic = await AsyncStorage.getItem('@picImg_Key')
             if (profilePic !== null) {
                 setImgFetched(true)
-                setImage(profilePic)
+                setimage(profilePic)
             }
         } catch (e) {
             console.error(e, 'problem with get storage')
@@ -67,11 +67,11 @@ function Profile() {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
+                <image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
                 <Text style={styles.title}>Bienvenue Lulu</Text>
             </View>
             <View style={styles.avatar}>
-                {(image && imgFetched) && <Image source={{uri: image}} style={{
+                {(image && imgFetched) && <image source={{uri: image}} style={{
                     width: 100,
                     height: 100,
                     marginHorizontal: 10,
@@ -79,11 +79,11 @@ function Profile() {
                     borderColor: "#f14688",
                     borderWidth: 2
                 }}/>}
-                {!image && <Image style={{width: 100, height: 100, marginHorizontal: 10}} source={defaultAvatar}/>}
+                {!image && <image style={{width: 100, height: 100, marginHorizontal: 10}} source={defaultAvatar}/>}
                 <CustomButton
                     type={'SECONDARY'}
                     text="Télécharge ton avatar"
-                    onPress={pickImage}/>
+                    onPress={pickimage}/>
             </View>
             <View style={styles.container}>
 
@@ -148,13 +148,13 @@ const styles = StyleSheet.create({
         marginVertical: 2,
         marginHorizontal: 2,
     },
-    inputscontainer: {
+    inputsContainer: {
         flex: 1,
 
     },
     logo: {
         width: '100%',
-        maxHeight: 300,
+        maxHeight: 200,
         marginBottom: 5,
     },
     title: {

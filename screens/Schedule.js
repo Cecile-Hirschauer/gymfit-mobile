@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, useWindowDimensions, View} from "react-native";
+import {image, ScrollView, StyleSheet, Text, useWindowDimensions, View} from "react-native";
 import logo from "../assets/imgs/logo.png";
 
 function Schedule() {
@@ -7,7 +7,7 @@ function Schedule() {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height*0.3}]} />
+                <image source={logo} style={[styles.logo, {height: height*0.3}]} />
                 <Text style={styles.title}>Planning</Text>
             </View>
 
