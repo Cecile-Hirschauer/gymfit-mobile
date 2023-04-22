@@ -1,4 +1,4 @@
-import { View, Text, image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
+import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
 import React, {useState} from 'react'
 import logo from '../assets/imgs/logo.png'
 import { useNavigation } from '@react-navigation/native'
@@ -24,7 +24,7 @@ function NewPasswordScreen() {
   return (
     <ScrollView showsHorizontalScrollIndicator={false}>
     <View style={styles.container}>
-      <image source={logo} style={[styles.logo, {height: height*0.3}]} />
+      <Image source={logo} style={[styles.logo, {height: height*0.3}]} />
       <Text style={styles.title}>
         Nouveau mot de passe
       </Text>

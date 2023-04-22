@@ -1,14 +1,25 @@
-import React from 'react';
-import {image, ScrollView, StyleSheet, Text, useWindowDimensions, View} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StyleSheet, Text, useWindowDimensions, View} from "react-native";
 import logo from "../assets/imgs/logo.png";
+import exercices from '../data/data'
 
 function WorkoutScreen() {
     const {height} = useWindowDimensions();
+    const [data, setData] = useState([]);
+
+
+
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
-                <image source={logo} style={[styles.logo, {height: height*0.3}]} />
-                <Text style={styles.title}>Exercices</Text>
+                <Image source={logo} style={[styles.logo, {height: height*0.3}]} />
+                <Text style={styles.title}>Exercises</Text>
+                <View>
+                    {exercices.map((exercise) => (
+                        <Text>{exercise.name}</Text>
+                    ))}
+                </View>
             </View>
 
         </ScrollView>

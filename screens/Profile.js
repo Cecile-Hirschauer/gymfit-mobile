@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
 import logo from "../assets/imgs/logo.png";
 import * as imagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,13 +15,13 @@ function Profile() {
 
     const [birthday, setBirthday] = useState(new Date())
     const [show, setShow] = useState(false)
-    const [image, setimage] = useState(null);
+    const [image, setImage] = useState(null);
     const [username, setUsername] = useState('');
     const [imgFetched, setImgFetched] = useState(false);
 
-    const pickimage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await imagePicker.launchimageLibraryAsync({
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the Image library
+        let result = await imagePicker.launchImageLibraryAsync({
             mediaTypes: imagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
@@ -29,7 +29,7 @@ function Profile() {
         });
         if (!result.canceled) {
             await storeData(result.assets[0].uri)
-            setimage(result.assets[0].uri);
+            setImage(result.assets[0].uri);
         }
     }
 
@@ -52,7 +52,7 @@ function Profile() {
             const profilePic = await AsyncStorage.getItem('@picImg_Key')
             if (profilePic !== null) {
                 setImgFetched(true)
-                setimage(profilePic)
+                setImage(profilePic)
             }
         } catch (e) {
             console.error(e, 'problem with get storage')
@@ -67,11 +67,11 @@ function Profile() {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
-                <image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
+                <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
                 <Text style={styles.title}>Bienvenue Lulu</Text>
             </View>
             <View style={styles.avatar}>
-                {(image && imgFetched) && <image source={{uri: image}} style={{
+                {(image && imgFetched) && <Image source={{uri: image}} style={{
                     width: 100,
                     height: 100,
                     marginHorizontal: 10,
@@ -79,11 +79,11 @@ function Profile() {
                     borderColor: "#f14688",
                     borderWidth: 2
                 }}/>}
-                {!image && <image style={{width: 100, height: 100, marginHorizontal: 10}} source={defaultAvatar}/>}
+                {!image && <Image style={{width: 100, height: 100, marginHorizontal: 10}} source={defaultAvatar}/>}
                 <CustomButton
                     type={'SECONDARY'}
                     text="Télécharge ton avatar"
-                    onPress={pickimage}/>
+                    onPress={pickImage}/>
             </View>
             <View style={styles.container}>
 
