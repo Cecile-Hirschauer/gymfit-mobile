@@ -13,7 +13,6 @@ import NewPasswordScreen from "../screens/NewPasswordScreen";
 
 import {GlobalStyles} from "../constants/styles";
 import {FontAwesome, MaterialIcons} from '@expo/vector-icons';
-import Schedule from "../screens/Schedule";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -57,12 +56,12 @@ function TabsMenu() {
 
 
             <BottomTabs.Screen
-                name={'Schedule'}
-                component={Schedule}
+                name={'SignInScreen'}
+                component={SignInScreen}
                 options={{
-                    title: 'planning',
-                    tabBarLabel: 'Planning',
-                    tabBarIcon: ({color, size}) => <FontAwesome name="calendar" size={size} color={color} />
+                    title: 'Logout',
+                    tabBarLabel: 'Se déconnecter',
+                    tabBarIcon: ({color, size}) => <MaterialIcons name="logout" size={size} color={color} />
                 }}
             />
         </BottomTabs.Navigator>
