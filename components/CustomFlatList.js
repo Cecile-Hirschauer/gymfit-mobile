@@ -1,11 +1,29 @@
-import React from 'react';
-import {FlatList, Image, View, Text, Pressable} from "react-native";
+import React, {useState} from 'react';
+import {FlatList, Image, View, Text, Pressable, TouchableOpacity, Dimensions} from "react-native";
 import {exercises} from "../data/exercises";
+import {listTab} from "../data/listTab";
+import uuid from "react-native-uuid";
 
-const CustomFlatList = ({category}) => {
 
+
+const CustomFlatList = () => {
+    const [status, setStatus] = useState('Tout');
+    const [dataList, setDataList] = useState(exercises)
+
+    const setStatusFilter = (status) => {
+        if (status !== 'Tout') {
+            setDataList([
+                ...exercises.filter(
+                (e) => e.status === status)]
+            )
+        }else {
+            setDataList(exercises)
+        }
+        setStatus(status)
+
+    }
     const renderItem = (e) => (
-        <Pressable style={styles.flatList}>
+        <TouchableOpacity key={e.item.id} style={styles.flatList}>
             <Image source={{uri: e.item.image}} style={styles.exercise_img}/>
            <View style={styles.text_container}>
                <Text style={styles.text_name}>
@@ -15,32 +33,43 @@ const CustomFlatList = ({category}) => {
                    {e.item.description}
                </Text>
            </View>
-        </Pressable>
+        </TouchableOpacity>
     )
 
     return (
         <View style={styles.container}>
-            <FlatList data={exercises} renderItem={renderItem}/>
-
-
+            <View style={styles.listTabs}>
+                {
+                    listTab.map((item) => (
+                        <TouchableOpacity
+                            style={[styles.btnTab, status === item.status && styles.btnTabActive]}
+                            onPress={() => setStatusFilter(item.status)}
+                        >
+                            <Text style={[styles.textTabs, status === item.status && styles.texTabActive]}>{item.status}</Text>
+                        </TouchableOpacity>
+                    ))
+                }
+            </View>
+            <FlatList data={dataList}
+                      renderItem={renderItem}
+                      keyExtractor={(item) => item.id}
+            />
         </View>
     );
 };
 
 const styles = {
     container: {
-        display: 'flex',
+        flex: 1,
         width: '100%',
-        padding: 15,
-        marginVertical: 10,
-        alignItems: 'center',
+        paddingHorizontal: 10,
+        justifyContent: 'center',
         borderRadius: 5,
     },
     flatList: {
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#fff',
-        width: 400,
         marginVertical: 3,
         padding: 5
     },
@@ -61,7 +90,38 @@ const styles = {
     text_container: {
         justifyContent: 'center',
         marginLeft: 10
+    },
+
+    listTabs: {
+        flex: 1,
+        padding: 2,
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginVertical: 5
+    },
+    btnTab: {
+        width: Dimensions.get('window').width / 4,
+        flexDirection: 'row',
+        borderWidth: 0.5,
+        borderColor: '#fff',
+        justifyContent: 'center',
+
+    },
+    btnTabActive: {
+        backgroundColor: '#ff914d',
+    },
+    textTabs: {
+        fontSize: 10,
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        padding: 5,
+        justifyContent: 'center',
+        color: '#39324a'
+    },
+    texTabActive: {
+        color: '#fff'
     }
+
 }
 
 export default CustomFlatList;
