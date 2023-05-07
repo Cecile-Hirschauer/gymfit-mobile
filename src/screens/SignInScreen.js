@@ -1,17 +1,22 @@
 import {View, Text, Image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native'
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {useNavigation} from "@react-navigation/native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import SocialSignInButtons from "../components/SocialSignInButtons";
 import logo from '../assets/imgs/logo.png'
+import {AuthContext} from "../context/AuthContext";
 
 function SignInScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+
     const {height} = useWindowDimensions()
     const navigation = useNavigation()
+
+    const {login} = useContext(AuthContext);
+
 
     const onSignInPress = () => {
         navigation.navigate('Home');
@@ -43,7 +48,7 @@ function SignInScreen() {
                 />
                 <CustomButton
                     text={'Se connecter'}
-                    onPress={onSignInPress}
+                    onPress={() => {login()}}
                     type={'PRIMARY'}
                 />
                 <CustomButton

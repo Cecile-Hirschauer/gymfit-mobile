@@ -8,7 +8,7 @@ import {
     View
 } from "react-native";
 import logo from "../assets/imgs/logo.png";
-import CustomFlatList from "../components/CustomFlatList";
+import CustomExercisesList from "../components/CustomExercisesList";
 
 
 function WorkoutScreen() {
@@ -20,7 +20,7 @@ function WorkoutScreen() {
             <View style={styles.container}>
                 <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
 
-                <CustomFlatList/>
+                <CustomExercisesList/>
             </View>
         </ScrollView>
     )

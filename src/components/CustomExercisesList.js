@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {FlatList, Image, View, Text, Pressable, TouchableOpacity, Dimensions} from "react-native";
-import {exercises} from "../data/exercises";
-import {listTab} from "../data/listTab";
+import {exercises} from "../utils/exercises/exercises";
+import {listTab} from "../utils/listTab";
 import uuid from "react-native-uuid";
 
 
 
-const CustomFlatList = () => {
+const CustomExercisesList = () => {
     const [status, setStatus] = useState('Tout');
     const [dataList, setDataList] = useState(exercises)
 
@@ -102,8 +102,6 @@ const styles = {
     btnTab: {
         width: Dimensions.get('window').width / 4,
         flexDirection: 'row',
-        borderWidth: 0.5,
-        borderColor: '#fff',
         justifyContent: 'center',
 
     },
@@ -124,4 +122,4 @@ const styles = {
 
 }
 
-export default CustomFlatList;
+export default CustomExercisesList;

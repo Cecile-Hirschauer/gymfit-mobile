@@ -10,7 +10,7 @@ import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
 
 
-function Profile() {
+function ProfileScreen() {
     const {height} = useWindowDimensions();
 
     const [birthday, setBirthday] = useState(new Date())
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
     })
 
 
-export default Profile;
+export default ProfileScreen;
