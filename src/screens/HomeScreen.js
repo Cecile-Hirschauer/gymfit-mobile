@@ -33,10 +33,7 @@ function HomeScreen() {
 
     return (
         <>
-            <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
 
-            </View>
             <View style={styles.home}>
                 <View style={styles.avatar}>
                     {(image && imgFetched) && <Image source={{uri: image}} style={{

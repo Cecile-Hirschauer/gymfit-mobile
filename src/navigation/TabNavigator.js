@@ -1,89 +1,56 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import HomeScreen from '../screens/HomeScreen';
-
-
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
 import ProfileScreen from "../screens/ProfileScreen";
 import WorkoutScreen from "../screens/WorkoutScreen";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import {FontAwesome} from "@expo/vector-icons";
+import {GlobalStyles} from "../constants/styles";
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
-
-const HomeStack = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={({route}) => ({
-                    title: route.params?.title,
-                })}
-            />
-            <Stack.Screen
-                name="Exercises"
-                component={WorkoutScreen}
-                options={({route}) => ({
-                    title: route.params?.title,
-                })}
-            />
-        </Stack.Navigator>
-    );
-};
+const BottomTabs = createBottomTabNavigator();
 
 const TabNavigator = () => {
     return (
-        <Tab.Navigator
+        <BottomTabs.Navigator
             screenOptions={{
-                headerShown: false,
                 tabBarShowLabel: false,
-                tabBarStyle: {backgroundColor: '#AD40AF'},
+                tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
+                tabBarActiveTintColor: GlobalStyles.colors.accent500,
                 tabBarInactiveTintColor: '#fff',
-                tabBarActiveTintColor: 'yellow',
+                headerShown: false
             }}>
-            <Tab.Screen
-                name="Home2"
+            <BottomTabs.Screen
+                name={'HomePage'}
                 component={HomeScreen}
-                options={({route}) => ({
-                    tabBarStyle: {
-                        display: getTabBarVisibility(route),
-                        backgroundColor: '#AD40AF',
-                    },
-                    tabBarIcon: ({color, size}) => (
-                        <Ionicons name="home-outline" color={color} size={size} />
-                    ),
-                })}
+                options={{
+                    title: 'Accueil',
+                    tabBarLabel: 'Accueil',
+                    tabBarIcon: ({color, size}) => <MaterialIcons name="home" size={size} color={color} />
+
+                }}
             />
-            <Tab.Screen
-                name="Cart"
+            <BottomTabs.Screen
+                name={'Profile'}
                 component={ProfileScreen}
                 options={{
-                    tabBarBadge: 3,
-                    tabBarBadgeStyle: {backgroundColor: 'yellow'},
-                    tabBarIcon: ({color, size}) => (
-                        <Feather name="shopping-bag" color={color} size={size} />
-                    ),
+                    title: 'Profil',
+                    tabBarLabel: 'Profil',
+                    tabBarIcon: ({color, size}) => <FontAwesome name="user" size={size} color={color}/>
+
                 }}
             />
-            <Tab.Screen
-                name="Favorite"
+            <BottomTabs.Screen
+                name={'Workout'}
                 component={WorkoutScreen}
                 options={{
-                    tabBarIcon: ({color, size}) => (
-                        <Ionicons name="heart-outline" color={color} size={size} />
-                    ),
+                    title: 'Workouts',
+                    tabBarLabel: 'Exercices',
+                    tabBarIcon: ({color, size}) => <MaterialIcons name="fitness-center" size={size} color={color} />
                 }}
             />
-        </Tab.Navigator>
+        </BottomTabs.Navigator>
     );
 };
 

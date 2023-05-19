@@ -66,10 +66,7 @@ function ProfileScreen() {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
-                <Text style={styles.title}>Bienvenue Lulu</Text>
-            </View>
+
             <View style={styles.avatar}>
                 {(image && imgFetched) && <Image source={{uri: image}} style={{
                     width: 100,

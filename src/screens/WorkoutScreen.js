@@ -18,8 +18,6 @@ function WorkoutScreen() {
     return (
         <ScrollView showsVerticalScrollIndicator={true} nestedScrollEnabled={true}>
             <View style={styles.container}>
-                <Image source={logo} style={[styles.logo, {height: height * 0.3}]}/>
-
                 <CustomExercisesList/>
             </View>
         </ScrollView>
