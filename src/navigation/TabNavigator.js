@@ -4,7 +4,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from "../screens/ProfileScreen";
-import WorkoutScreen from "../screens/WorkoutScreen";
+import ExercisesListScreen from "../screens/ExercisesListScreen";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {FontAwesome} from "@expo/vector-icons";
 import {GlobalStyles} from "../constants/styles";
@@ -43,7 +43,7 @@ const TabNavigator = () => {
             />
             <BottomTabs.Screen
                 name={'Workout'}
-                component={WorkoutScreen}
+                component={ExercisesListScreen}
                 options={{
                     title: 'Workouts',
                     tabBarLabel: 'Exercices',

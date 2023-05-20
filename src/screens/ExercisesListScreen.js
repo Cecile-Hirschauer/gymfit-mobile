@@ -1,18 +1,14 @@
 import React from 'react';
 import {
-    Image,
-    ScrollView,
     StyleSheet,
-    Text,
-    useWindowDimensions,
+
     View
 } from "react-native";
-import logo from "../assets/imgs/logo.png";
 import CustomExercisesList from "../components/CustomExercisesList";
+import { ScrollView } from 'react-native-virtualized-view'
 
 
-function WorkoutScreen() {
-    const {height} = useWindowDimensions();
+function ExercisesListScreen() {
 
 
     return (
@@ -39,4 +35,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default WorkoutScreen;
+export default ExercisesListScreen;

@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, useWindowDimensions, View} from "react-native";
-import logo from "../assets/imgs/logo.png";
-import imgHomePage from "../assets/imgs/imgs_hp.png"
+import {Image, Pressable, StyleSheet, Text, useWindowDimensions, View} from "react-native";
 import defaultAvatar from "../assets/imgs/defaultProfil.jpeg";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomButton from "../components/CustomButton";
 
-function HomeScreen() {
+
+
+function HomeScreen({navigation}) {
     const {height} = useWindowDimensions();
     const [image, setImage] = useState(null);
     const [imgFetched, setImgFetched] = useState(false);
@@ -45,6 +46,13 @@ function HomeScreen() {
                         borderWidth: 2
                     }}/>}
                     {!image && <Image style={{width: 100, height: 100, marginHorizontal: 10, borderRadius: 100}} source={defaultAvatar}/>}
+                </View>
+                <View>
+                <CustomButton
+                    text={'Faire un exercice'}
+                    type={'TERTIARY'}
+                    onPress={() => navigation.navigate('DisplayExercise')}
+                />
                 </View>
             </View>
         </>

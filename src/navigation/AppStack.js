@@ -1,7 +1,8 @@
 import TabNavigator from "./TabNavigator";
 import ProfileScreen from "../screens/ProfileScreen";
-import WorkoutScreen from "../screens/WorkoutScreen";
+import ExercisesListScreen from "../screens/ExercisesListScreen";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import ExerciseDisplay from "../screens/ExerciseDisplayScreeen";
 const Stack = createNativeStackNavigator();
 
 
@@ -23,7 +24,8 @@ export default function AppStack() {
             <Stack.Screen name="Profile" component={ProfileScreen} options={{
                 headerShown: false
             }} />
-            <Stack.Screen name="Workout" component={WorkoutScreen} />
+            <Stack.Screen name="ExrecisesList" component={ExercisesListScreen} />
+            <Stack.Screen name={"DisplayExercise"} component={ExerciseDisplay} />
         </Stack.Navigator>
     );
 }

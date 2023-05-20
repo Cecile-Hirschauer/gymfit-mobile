@@ -7,6 +7,7 @@ import {useContext} from "react";
 import {View, ActivityIndicator} from "react-native";
 
 import AuthStack from "./AuthStack";
+import AppStack from "./AppStack";
 
 const Stack = createNativeStackNavigator();
 

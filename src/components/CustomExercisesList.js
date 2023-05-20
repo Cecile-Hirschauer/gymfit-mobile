@@ -1,14 +1,22 @@
 import React, {useState} from 'react';
-import {FlatList, Image, View, Text, Pressable, TouchableOpacity, Dimensions} from "react-native";
+import {FlatList, Image, View, Text, TouchableOpacity, Dimensions} from "react-native";
 import {exercises} from "../utils/exercises/exercises";
 import {listTab} from "../utils/listTab";
-import uuid from "react-native-uuid";
+import {useNavigation} from "@react-navigation/native";
 
 
 
-const CustomExercisesList = () => {
+const CustomExercisesList = ({id}) => {
     const [status, setStatus] = useState('Tout');
     const [dataList, setDataList] = useState(exercises)
+
+    const  navigation = useNavigation();
+
+    const selectExerciseHandler = () => {
+        navigation.navigate('DisplayExercise', {
+            exerciseId: id,
+        })
+    }
 
     const setStatusFilter = (status) => {
         if (status !== 'Tout') {
@@ -23,7 +31,13 @@ const CustomExercisesList = () => {
 
     }
     const renderItem = (e) => (
-        <TouchableOpacity key={e.item.id} style={styles.flatList}>
+        <TouchableOpacity
+            key={e.item.id}
+            style={styles.flatList}
+            onPress={() => navigation.navigate('DisplayExercise', {
+                id: e.item.id
+            })}
+        >
             <Image source={{uri: e.item.image}} style={styles.exercise_img}/>
            <View style={styles.text_container}>
                <Text style={styles.text_name}>
@@ -52,7 +66,7 @@ const CustomExercisesList = () => {
             </View>
             <FlatList data={dataList}
                       renderItem={renderItem}
-                      keyExtractor={(item) => item.id}
+                      keyExtractor={(item, index) => index.toString()}
             />
         </View>
     );
