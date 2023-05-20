@@ -48,11 +48,7 @@ function HomeScreen({navigation}) {
                     {!image && <Image style={{width: 100, height: 100, marginHorizontal: 10, borderRadius: 100}} source={defaultAvatar}/>}
                 </View>
                 <View>
-                <CustomButton
-                    text={'Faire un exercice'}
-                    type={'TERTIARY'}
-                    onPress={() => navigation.navigate('DisplayExercise')}
-                />
+
                 </View>
             </View>
         </>

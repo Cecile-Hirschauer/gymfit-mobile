@@ -23,7 +23,7 @@ const ExerciseDisplay = ({route}) => {
                     repeat={selectedExercise.repeat}
                     recuperation={selectedExercise.recuperation}
                     body_part={selectedExercise.body_part}
-                    infos={selectedExercise.body_part}
+                    infos={selectedExercise.infos}
                 />
             </View>
             <View style={styles.timerContainer}>

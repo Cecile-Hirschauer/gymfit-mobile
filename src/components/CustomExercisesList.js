@@ -84,8 +84,8 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#fff',
-        marginVertical: 3,
-        padding: 5
+        margin: 5,
+        padding: 5,
     },
     exercise_img: {
         width: 100,

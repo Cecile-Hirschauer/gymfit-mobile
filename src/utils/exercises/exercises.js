@@ -93,7 +93,7 @@ export const exercises = [
   {
     id: uuid.v4(),
     image: "https://storage.googleapis.com/glide-prod.appspot.com/uploads-v2/2xVLGxlGa3UOGPsTDXMc/pub/s3KwHMVP1cFRmOPLdLkc.png",
-    name: "hanche & cuisse",
+    name: "Hanches & cuisse",
     description: "C'est un super mouvement !",
     infos: "Vous pouvez modifier les quantités et le temps de recuperation plus tard.",
     category: "Partie 3 : Étirements",

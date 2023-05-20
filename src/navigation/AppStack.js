@@ -8,24 +8,30 @@ const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
     return (
-        <Stack.Navigator >
+        <Stack.Navigator screenOptions={{
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+            headerStyle: {
+                backgroundColor: '#E83283'
+            },
+            headerTintColor: '#fff',
+            headerTitleAlign: 'center'
+        }} >
             <Stack.Screen name="Home" component={TabNavigator} options={{
                 title: "GYMFIT",
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                },
-                headerStyle: {
-                    backgroundColor: '#E83283'
-                },
-                headerTintColor: '#fff',
-                headerTitleAlign: 'center'
+
 
             }} />
             <Stack.Screen name="Profile" component={ProfileScreen} options={{
                 headerShown: false
             }} />
             <Stack.Screen name="ExrecisesList" component={ExercisesListScreen} />
-            <Stack.Screen name={"DisplayExercise"} component={ExerciseDisplay} />
+            <Stack.Screen
+                name={"DisplayExercise"}
+                component={ExerciseDisplay}
+                options={({route}) => ({title: route.params.title}) }
+            />
         </Stack.Navigator>
     );
 }

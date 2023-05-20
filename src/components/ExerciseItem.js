@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 20,
-        color: GlobalStyles.colors.primary400
+        color: GlobalStyles.colors.primary700
     },
     subTitle: {
         textAlign: "center",
