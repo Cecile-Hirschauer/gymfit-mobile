@@ -16,12 +16,10 @@ function SignInScreen() {
     const {height} = useWindowDimensions()
     const navigation = useNavigation()
 
-    const handleLogin = () => {
-        login(email, password)
-    }
+
 
     const onSignInPress = () => {
-        navigation.navigate('Home');
+        navigation.navigate('HomePage');
     }
 
     const onForgotPasswordPress = () => {
@@ -50,10 +48,9 @@ function SignInScreen() {
                 />
                 <CustomButton
                     text={'Se connecter'}
-                    onPress={handleLogin}
+                    onPress={onSignInPress}
                     type={'PRIMARY'}
                 />
-                {error && <Text>{error}</Text>}
                 <CustomButton
                     text={'Mot de passe oublié'}
                     onPress={onForgotPasswordPress}

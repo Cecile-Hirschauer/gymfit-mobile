@@ -12,19 +12,12 @@ import AppStack from "./AppStack";
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
-    const {isLoading, userToken} = useContext(AuthContext);
+    const isLoggedIn = true;
 
-    if (isLoading) {
-        return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <ActivityIndicator size="large" />
-            </View>
-        );
-    }
 
     return (
         <NavigationContainer>
-            {userToken ? <AppStack /> : <AuthStack />}
+            {isLoggedIn ? <AppStack /> : <AuthStack />}
         </NavigationContainer>
     );
 }

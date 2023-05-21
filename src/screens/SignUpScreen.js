@@ -17,7 +17,7 @@ function SignUpScreen() {
   const navigation = useNavigation()
 
   const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail')
+    navigation.navigate('Home')
   }
 
   const onTermsOfUsePressed = () => {

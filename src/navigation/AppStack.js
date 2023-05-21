@@ -8,7 +8,8 @@ const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
     return (
-        <Stack.Navigator screenOptions={{
+        <Stack.Navigator initialRouteName={'Home'} screenOptions={{
+
             headerTitleStyle: {
                 fontWeight: 'bold',
             },
@@ -18,7 +19,7 @@ export default function AppStack() {
             headerTintColor: '#fff',
             headerTitleAlign: 'center'
         }} >
-            <Stack.Screen name="Home" component={TabNavigator} options={{
+            <Stack.Screen name="HomePage" component={TabNavigator} options={{
                 title: "GYMFIT",
 
 
