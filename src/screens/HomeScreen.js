@@ -25,7 +25,8 @@ function HomeScreen({navigation}) {
 
 
     useEffect(() => {
-        getData();
+        getData().then(() => setImage(image))
+
     }, []);
 
 

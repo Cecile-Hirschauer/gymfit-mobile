@@ -8,15 +8,17 @@ import logo from '../assets/imgs/logo.png'
 import {AuthContext} from "../context/AuthContext";
 
 function SignInScreen() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const { login, error } = useContext(AuthContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
 
     const {height} = useWindowDimensions()
     const navigation = useNavigation()
 
-    const {login} = useContext(AuthContext);
-
+    const handleLogin = () => {
+        login(email, password)
+    }
 
     const onSignInPress = () => {
         navigation.navigate('Home');
@@ -48,9 +50,10 @@ function SignInScreen() {
                 />
                 <CustomButton
                     text={'Se connecter'}
-                    onPress={() => {login()}}
+                    onPress={handleLogin}
                     type={'PRIMARY'}
                 />
+                {error && <Text>{error}</Text>}
                 <CustomButton
                     text={'Mot de passe oublié'}
                     onPress={onForgotPasswordPress}

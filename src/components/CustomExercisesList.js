@@ -6,17 +6,11 @@ import {useNavigation} from "@react-navigation/native";
 
 
 
-const CustomExercisesList = ({id}) => {
+const CustomExercisesList = () => {
     const [status, setStatus] = useState('Tout');
     const [dataList, setDataList] = useState(exercises)
 
     const  navigation = useNavigation();
-
-    const selectExerciseHandler = () => {
-        navigation.navigate('DisplayExercise', {
-            exerciseId: id,
-        })
-    }
 
     const setStatusFilter = (status) => {
         if (status !== 'Tout') {
@@ -34,16 +28,16 @@ const CustomExercisesList = ({id}) => {
         <TouchableOpacity
             key={e.item.id}
             style={styles.flatList}
-            onPress={() => navigation.navigate('DisplayExercise', {
+            onPress={() => navigation.navigate('Exercice', {
                 id: e.item.id
             })}
         >
-            <Image source={{uri: e.item.image}} style={styles.exercise_img}/>
-           <View style={styles.text_container}>
-               <Text style={styles.text_name}>
+            <Image source={{uri: e.item.image}} style={styles.exercise_img}  key={`${e.item.id}_img`}/>
+           <View style={styles.text_container}  key={`${e.item.id}_view`}>
+               <Text style={styles.text_name} key={`${e.item.id}_name`}>
                    {e.item.name}
                </Text>
-               <Text style={styles.text_description}>
+               <Text style={styles.text_description} key={`${e.item.id}_description`}>
                    {e.item.description}
                </Text>
            </View>
@@ -54,10 +48,11 @@ const CustomExercisesList = ({id}) => {
         <View style={styles.container}>
             <View style={styles.listTabs}>
                 {
-                    listTab.map((item) => (
+                    listTab.map((item, index) => (
                         <TouchableOpacity
                             style={[styles.btnTab, status === item.status && styles.btnTabActive]}
                             onPress={() => setStatusFilter(item.status)}
+                            key={index.toString()}
                         >
                             <Text style={[styles.textTabs, status === item.status && styles.texTabActive]}>{item.status}</Text>
                         </TouchableOpacity>
@@ -66,7 +61,7 @@ const CustomExercisesList = ({id}) => {
             </View>
             <FlatList data={dataList}
                       renderItem={renderItem}
-                      keyExtractor={(item, index) => index.toString()}
+                      keyExtractor={(item) => item.id}
             />
         </View>
     );

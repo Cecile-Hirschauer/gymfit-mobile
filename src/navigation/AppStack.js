@@ -28,9 +28,9 @@ export default function AppStack() {
             }} />
             <Stack.Screen name="ExrecisesList" component={ExercisesListScreen} />
             <Stack.Screen
-                name={"DisplayExercise"}
+                name={"Exercice"}
                 component={ExerciseDisplay}
-                options={({route}) => ({title: route.params.title}) }
+                options={({route}) => ({title: route.params.name}) }
             />
         </Stack.Navigator>
     );

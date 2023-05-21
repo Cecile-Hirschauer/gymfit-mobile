@@ -10,11 +10,11 @@ import { ScrollView } from 'react-native-virtualized-view'
 
 function ExercisesListScreen() {
 
-
+    /* eslint-disable react/no-array-index-key */
     return (
         <ScrollView showsVerticalScrollIndicator={true} nestedScrollEnabled={true}>
-            <View style={styles.container}>
-                <CustomExercisesList/>
+            <View style={styles.container} >
+                <CustomExercisesList />
             </View>
         </ScrollView>
     )

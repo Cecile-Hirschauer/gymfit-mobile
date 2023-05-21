@@ -1,6 +1,5 @@
-import {Pressable, StyleSheet, Text, View, Image, ScrollView} from 'react-native'
-import React, {useState} from 'react'
-import {exercises} from "../utils/exercises/exercises";
+import { StyleSheet, Text, View, Image, ScrollView} from 'react-native'
+import React from 'react'
 import {GlobalStyles} from "../constants/styles";
 
 export default function ExerciseItem({name, imageUrl, description, movement, repeat, recuperation, body_part, infos}) {

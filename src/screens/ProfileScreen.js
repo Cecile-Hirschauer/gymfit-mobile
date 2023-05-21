@@ -33,11 +33,6 @@ function ProfileScreen() {
         }
     }
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setShow(false)
-        setBirthday(currentDate)
-    }
 
     const storeData = async (image) => {
         try {
@@ -60,8 +55,9 @@ function ProfileScreen() {
     }
 
     useEffect(() => {
-        getData();
-    }, []);
+        setImage(image)
+        getData()
+    }, [image]);
 
 
     return (
