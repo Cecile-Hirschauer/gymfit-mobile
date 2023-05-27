@@ -2,6 +2,9 @@ import React, { createContext, useState } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const API_URL = process.env.API_URL;
+const API_KEY = process.env.API_KEY;
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -10,20 +13,20 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);  // Ajout d'un état pour les erreurs
 
     const api = axios.create({
-        baseURL: 'http://172.19.0.4:8000/api',
+        baseURL: `${API_URL}/api`,
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*', // Ajoutez ici le header CORS
         },
     });
 
-    const login = async (username, password) => {
+    const login = async (email, password) => {
         setIsLoading(true);
 
         try {
             const response = await api.post('/login_check',
                 {
-                username,
+                email,
                 password,
             });
 
