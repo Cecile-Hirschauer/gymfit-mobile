@@ -1,24 +1,64 @@
-import React, {useEffect, useState} from 'react'
-import {Button, Image, ScrollView, StyleSheet, Text, TextInput, useWindowDimensions, View} from "react-native";
-import logo from "../assets/imgs/logo.png";
+import React, {useContext, useEffect, useState} from 'react'
+import { Image, ScrollView, StyleSheet, View} from "react-native";
 import * as imagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import defaultAvatar from '../assets/imgs/defaultProfil.jpeg';
 import CustomButton from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
-import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
+import {FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import {AuthContext} from "../context/AuthContext";
 
+const API_URL = process.env.API_URL;
 
 function ProfileScreen() {
-    const {height} = useWindowDimensions();
 
-    const [birthday, setBirthday] = useState(new Date())
-    const [show, setShow] = useState(false)
     const [image, setImage] = useState(null);
-    const [username, setUsername] = useState('');
     const [imgFetched, setImgFetched] = useState(false);
+    const [userDetails, setUserDetails] = useState({});
+    const { userToken } = useContext(AuthContext);
+    const [age, setAge] = useState(0);
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [userSize, setSizeUser] = useState(0);
+    const [userWeight, setUserWeight] = useState(0);
+    const [imc, setIMC] = useState(0);
 
+    let tokenPayload = jwtDecode(userToken);
+    let memberId = tokenPayload.memberId;
+
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/api/members/${memberId}`);
+                setUserDetails(response.data);
+                console.log(response.data);
+                setFirstname(response.data.firstName);
+                setLastname(response.data.lastName);
+                setEmail(response.data.email);
+                setPhoneNumber(response.data.phoneNumber);
+                setAge(response.data.userAge);
+                setSizeUser(response.data.sizeUser);
+                setUserWeight(response.data.weightUser);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des détails de l'utilisateur: ", error);
+            }
+        };
+        fetchUserDetails();
+    }, [memberId]);
+
+    const calculateIMC = (weight, size) => {
+        const imc = weight / Math.pow(size / 100, 2);
+        return imc.toFixed(2);
+    }
+
+    useEffect(() => {
+        const IMC = calculateIMC(userWeight, userSize);
+        setIMC(IMC);
+    }, [userWeight, userSize]);
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await imagePicker.launchImageLibraryAsync({
@@ -81,48 +121,43 @@ function ProfileScreen() {
             <View style={styles.container}>
 
                 <CustomInput
-                    placeholder='Ton prénom'
                     style={styles.input}
-                    value={''}
+                    value={firstname}
 
                 />
                 <CustomInput
-                    placeholder='Ton nom de famille'
                     style={styles.input}
-                    value={''}
+                    value={lastname}
 
                 />
                 <CustomInput
-                    placeholder='Ton email'
                     style={styles.input}
-                    value={''}
+                    value={email}
 
                 />
                 <CustomInput
-                    placeholder='Ton n° de téléphone'
                     style={styles.input}
-                    value={''}
+                    value={phoneNumber}
 
                 />
                 <View style={styles.row}>
                     <View style={styles.box}>
                         <FontAwesome name="birthday-cake" size={24} color="black" />
-                        <CustomInput placeholder={'Age'} type={'Secondary'} />
+                        <CustomInput value={age ? age.toString() + ' ans': 0} type={'Secondary'}  />
+                    </View>
+                    <View style={styles.box}>
+                        <MaterialCommunityIcons name="human-male-height" size={24} color="black" />
+                        <CustomInput value={userSize ? userSize.toString() / 100 + ' m': 0} type={'Secondary'} />
                     </View>
                     <View style={styles.box}>
                         <FontAwesome5 name="weight" size={24} color="black" />
-                        <CustomInput placeholder={'Poids'} type={'Secondary'} />
-                    </View>
-                    <View style={styles.box}>
-                        <Foundation name="target" size={24} color="black" />
-                        <CustomInput placeholder={'Ojectif'} type={'Secondary'} />
+                        <CustomInput value={ userWeight ? userWeight.toString() + ' kg': 0 } type={'Secondary'} />
                     </View>
                     <View style={styles.box}>
                         <Ionicons name="fitness-sharp" size={24} color="black" />
-                        <CustomInput placeholder={'IMC'} type={'Secondary'} />
+                        <CustomInput value={imc ? imc : 0} type={'Secondary'} />
                     </View>
                 </View>
-                <CustomButton type={'PRIMARY'} fgColor={'#FFF'} text={'Sauvegarder'} />
 
 
             </View>
@@ -164,10 +199,10 @@ const styles = StyleSheet.create({
         color: '#f14688',
     },
     box: {
-        width: 90,
+        width: 80,
         height: 80,
         alignItems: "center",
-
+        justifyContent: "center"
     },
     row: {
         flexDirection: 'row',

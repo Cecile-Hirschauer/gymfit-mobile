@@ -5,21 +5,44 @@ import CustomButton from "../components/CustomButton";
 import SocialSignInButtons from "../components/SocialSignInButtons";
 import logo from '../assets/imgs/logo.png'
 import {AuthContext} from "../context/AuthContext";
+import Toast from "react-native-toast-message";
 
 function SignInScreen({navigation}) {
     const { login, error } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     const {height} = useWindowDimensions()
 
 
 
-    const onSignInPress = () => {
-        navigation.navigate('Home', {screen: 'HomePage'});
-        console.log('plop!')
-    }
+    const onSignInPress = async () => {
+        try {
+            await login(email, password);
+            navigation.navigate('Home', {screen: 'HomePage'});
+        } catch (error) {
+            if (error.response && error.response.status === 404){
+                Toast.show({
+                    type: 'error',
+                    position: 'bottom',
+                    text1: 'Erreur de connexion',
+                    text2: "L'URL de connexion n'a pas été trouvée. Veuillez vérifier votre configuration.",
+                    visibilityTime: 4000,
+                    autoHide: true,
+                });
+            } else {
+                console.log('error', error);
+                console.log('error message', error.message);
+                console.log('error response', error.response);
+                console.log('error request', error.request);
+                setErrorMessage('Une erreur est survenue lors de la connexion. Veuillez réessayer.');  // Mettre à jour l'état d'erreur
+            }
+
+        };
+        }
+
 
     const onForgotPasswordPress = () => {
         navigation.navigate('ForgotPassword');
@@ -50,6 +73,7 @@ function SignInScreen({navigation}) {
                     onPress={onSignInPress}
                     type={'PRIMARY'}
                 />
+                {errorMessage && <Text>{errorMessage}</Text>}
                 <CustomButton
                     text={'Mot de passe oublié'}
                     onPress={onForgotPasswordPress}
@@ -63,8 +87,8 @@ function SignInScreen({navigation}) {
             </View>
         </ScrollView>
     )
-}
 
+}
 
 const styles = StyleSheet.create({
     logo: {

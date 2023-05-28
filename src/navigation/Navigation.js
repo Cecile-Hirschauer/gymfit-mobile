@@ -79,7 +79,7 @@ function TabsMenu() {
 
 export default function Navigation() {
     const {isLoading, userToken} = useContext(AuthContext);
-    const isLoggedIn = false;
+    const isLoggedIn = userToken !== null;
 
     if (isLoading) {
         return (

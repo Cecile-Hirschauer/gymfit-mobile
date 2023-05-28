@@ -3,7 +3,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = process.env.API_URL;
-const API_KEY = process.env.API_KEY;
 
 export const AuthContext = createContext();
 
@@ -20,13 +19,13 @@ export const AuthProvider = ({ children }) => {
         },
     });
 
-    const login = async (email, password) => {
+    const login = async (username, password) => {
         setIsLoading(true);
 
         try {
             const response = await api.post('/login_check',
                 {
-                email,
+                username,
                 password,
             });
 
