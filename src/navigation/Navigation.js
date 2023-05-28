@@ -23,8 +23,6 @@ const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 
-
-
 function TabsMenu() {
     const { logout } = useContext(AuthContext);
     const navigation = useNavigation();  // Utilisez le hook useNavigation pour obtenir l'objet navigation
@@ -75,11 +73,11 @@ function TabsMenu() {
 
             <BottomTabs.Screen
                 name={'Logout'}
-                component={View} // Nous devons passer un composant, mais il ne sera pas rendu.
+                component={View} // Passer un composant, mais il ne sera pas rendu.
                 listeners={{
                     tabPress: async (e) => {
                         e.preventDefault(); // Cela empêche la navigation vers l'écran de déconnexion.
-                        await logout();  // Faites le logout
+                        await logout();
                         navigation.reset({
                             index: 0,
                             routes: [{ name: 'SignIn' }]  // Redirige vers la page SignIn

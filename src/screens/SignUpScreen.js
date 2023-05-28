@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 import CustomButton from "../components/CustomButton";
 import SocialSignInButtons from "../components/SocialSignInButtons";
 import CustomInput from "../components/CustomInput";
+import axios from "axios";
+const API_URL = process.env.API_URL;
 
 function SignUpScreen() {
   const [username, setUsername] = useState('') 
@@ -16,8 +18,21 @@ function SignUpScreen() {
 
   const navigation = useNavigation()
 
-  const onRegisterPressed = () => {
-    navigation.navigate('Home')
+  const onRegisterPressed = async () => {
+    try {
+      const response = await axios.post(`${API_URL}/api/users`, {
+        username: username,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+      });
+      console.log(response.data); // Vous pouvez afficher ou traiter la réponse du serveur
+
+      // Naviguer vers une autre page après l'inscription réussie
+      navigation.navigate('Home');
+    } catch (error) {
+      console.error(error); // Gérer les erreurs d'inscription
+    }
   }
 
   const onTermsOfUsePressed = () => {
@@ -29,8 +44,9 @@ function SignUpScreen() {
   }
 
   const onSignInPress = () => {
-    navigation.navigate('SignIn')
-  }
+    navigation.navigate('SignInScreen')
+  };
+
 
   return (
     <ScrollView showsHorizontalScrollIndicator={false}>
