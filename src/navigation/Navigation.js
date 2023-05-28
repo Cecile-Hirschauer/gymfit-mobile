@@ -46,6 +46,7 @@ function TabsMenu() {
                 name={'HomePage'}
                 component={HomeScreen}
                 options={{
+                    headerShown: false,
                     tabBarLabel: 'Accueil',
                     tabBarIcon: ({color, size}) => <MaterialIcons name="home" size={size} color={color} />
 

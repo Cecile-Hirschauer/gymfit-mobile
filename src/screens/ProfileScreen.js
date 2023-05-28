@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { Image, ScrollView, StyleSheet, View} from "react-native";
 import * as imagePicker from 'expo-image-picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import defaultAvatar from '../assets/imgs/defaultProfil.jpeg';
 import CustomButton from "../components/CustomButton";
 import CustomInput from "../components/CustomInput";
