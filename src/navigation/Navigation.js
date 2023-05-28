@@ -1,10 +1,10 @@
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, useNavigation} from "@react-navigation/native";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 
 import {AuthContext} from "../context/AuthContext";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {View, ActivityIndicator} from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
@@ -26,6 +26,9 @@ const BottomTabs = createBottomTabNavigator();
 
 
 function TabsMenu() {
+    const { logout } = useContext(AuthContext);
+    const navigation = useNavigation();  // Utilisez le hook useNavigation pour obtenir l'objet navigation
+
     return (
         <BottomTabs.Navigator  screenOptions={{
             tabBarStyle: {backgroundColor: GlobalStyles.colors.primary500},
@@ -70,7 +73,24 @@ function TabsMenu() {
                 }}
             />
 
-
+            <BottomTabs.Screen
+                name={'Logout'}
+                component={View} // Nous devons passer un composant, mais il ne sera pas rendu.
+                listeners={{
+                    tabPress: async (e) => {
+                        e.preventDefault(); // Cela empêche la navigation vers l'écran de déconnexion.
+                        await logout();  // Faites le logout
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'SignIn' }]  // Redirige vers la page SignIn
+                        });
+                    }
+                }}
+                options={{
+                    tabBarLabel: 'Déconnexion',
+                    tabBarIcon: ({color, size}) => <MaterialIcons name="exit-to-app" size={size} color={color}/>
+                }}
+            />
 
         </BottomTabs.Navigator>
     )
@@ -80,6 +100,11 @@ function TabsMenu() {
 export default function Navigation() {
     const {isLoading, userToken} = useContext(AuthContext);
     const isLoggedIn = userToken !== null;
+
+    useEffect(() => {
+        console.log('User token changed:', userToken);  // Doit changer à null après la déconnexion
+    }, [userToken]);
+
 
     if (isLoading) {
         return (

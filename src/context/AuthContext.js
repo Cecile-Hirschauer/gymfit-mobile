@@ -9,13 +9,13 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState(null);
-    const [error, setError] = useState(null);  // Ajout d'un état pour les erreurs
+    const [error, setError] = useState(null);
 
     const api = axios.create({
         baseURL: `${API_URL}/api`,
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*', // Ajoutez ici le header CORS
+            'Access-Control-Allow-Origin': '*',
         },
     });
 
@@ -46,13 +46,10 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
 
         try {
-            // Pour se déconnecter, vous devez probablement envoyer une requête à l'API
-            // En supposant qu'il y a un endpoint '/logout' sur votre API, le code pourrait ressembler à cela :
-            await api.post('/logout');
             await AsyncStorage.removeItem('@token');
             setUserToken(null);
         } catch (error) {
-            // Gérer l'erreur
+            console.log('Error during logout:', error);
         }
 
         setIsLoading(false);

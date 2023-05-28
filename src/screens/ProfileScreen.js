@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         marginVertical: 10,
     }
-    })
+})
 
 
 export default ProfileScreen;
