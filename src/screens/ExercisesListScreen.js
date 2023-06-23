@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    StyleSheet,
-
-    View
-} from "react-native";
+import {StyleSheet, View} from "react-native";
 import CustomExercisesList from "../components/CustomExercisesList";
 import { ScrollView } from 'react-native-virtualized-view'
 

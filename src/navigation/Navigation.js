@@ -18,6 +18,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {FontAwesome} from "@expo/vector-icons";
 import {GlobalStyles} from "../constants/styles";
 import ExercisesListScreen from "../screens/ExercisesListScreen";
+import ExerciseDisplayScreeen from "../screens/ExerciseDisplayScreeen";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -98,6 +99,7 @@ function TabsMenu() {
 
 export default function Navigation() {
     const {isLoading, userToken} = useContext(AuthContext);
+    // const isLoggedIn = userToken !== null;
     const isLoggedIn = userToken !== null;
 
     useEffect(() => {
@@ -127,6 +129,8 @@ export default function Navigation() {
                 <Stack.Screen name="Home" component={TabsMenu} options={{headerShown: false}} />
                 <Stack.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}} />
                 <Stack.Screen name="Exercises" component={ExercisesListScreen} options={{headerShown: false}} />
+                <Stack.Screen name="Exercice" component={ExerciseDisplayScreeen} options={{headerShown: false}} />
+
             </Stack.Navigator>
         </NavigationContainer>
     );
